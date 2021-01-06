@@ -1,0 +1,54 @@
+﻿@model ProjetConcoursAspCore.Areas.Admin.ViewModel.AdminViewModel
+
+@{
+    ViewData["Title"] = "Admin Login";
+    Layout = "/Views/Shared/_LayoutSimple.cshtml";
+}
+
+
+<h2>@ViewData["Title"]</h2>
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="card-group">
+            <div class="card p-4">
+                <div class="card-body">
+                    <section>
+                        <form id="account" method="post" asp-action="Login">
+                            <h4>Connectez-vous</h4>
+                            <hr />
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="icon-user"></i>
+                                    </span>
+                                </div>
+                                <input asp-for="Login" class="form-control" type="text" placeholder="Login">
+                                <span asp-validation-for="Login" class="text-danger"></span>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="icon-user"></i>
+                                    </span>
+                                </div>
+                                <input asp-for="Password" class="form-control" type="password" placeholder="Mot de passe">
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+
+                            
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary px-4">Connexion</button>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

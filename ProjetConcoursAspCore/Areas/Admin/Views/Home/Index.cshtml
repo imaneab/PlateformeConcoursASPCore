@@ -1,0 +1,731 @@
+﻿@model ProjetConcoursAspCore.Areas.Admin.ViewModel.HomeViewModel
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<script>
+    function exportTableToExcel(tableID, filename = '') {
+        var downloadLink;
+        var dataType = 'application/vnd.ms-excel';
+        var tableSelect = document.getElementById(tableID);
+        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+        // Specify file name
+        filename = filename ? filename + '.xls' : 'excel_data.xls';
+
+        // Create download link element
+        downloadLink = document.createElement("a");
+
+        document.body.appendChild(downloadLink);
+
+        if (navigator.msSaveOrOpenBlob) {
+            var blob = new Blob(['\ufeff', tableHTML], {
+                type: dataType
+            });
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            // Create a link to the file
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+            // Setting the file name
+            downloadLink.download = filename;
+
+            //triggering the function
+            downloadLink.click();
+        }
+    }</script>
+<script src="~/Scripts/jquery.table2excel.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<main class="main">
+    <!-- Breadcrumb-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">Home</li>
+        <li class="breadcrumb-item">
+            <a href="/admin">Acceuil</a>
+        </li>
+
+        <!-- Breadcrumb Menu-->
+        <li class="breadcrumb-menu d-md-down-none">
+            <div class="btn-group" role="group" aria-label="Button group">
+                <a class="btn" href="/admin">
+                    <i class="icon-speech"></i>
+                </a>
+                <a class="btn" href="/admin">
+                    <i class="icon-graph"></i>  Acceuil
+                </a>
+                <a class="btn" href="/admin">
+                    <i class="icon-settings"></i>  Parametres
+                </a>
+            </div>
+        </li>
+    </ol>
+    <div class="container-fluid">
+        <div class="animated fadeIn">
+
+           
+            <div class="row">
+               
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card text-white bg-primary">
+                            <div class="card-body pb-0">
+                                <div><h5>Total inscrit en 4ieme annee</h5></div>
+                                <div class="text-value">
+                                    <h3 style="color:yellow">@Model.NbrTotal4</h3>
+
+                                    <small>@Model.NbrInfo4 Informatique</small><br />
+                                    <small>@Model.NbrIndus4 Industriels</small><br />
+                                    <small>@Model.NbrProcede4 Procedes</small><br />
+                                    <small>@Model.NbrTelecom4 Telecom</small>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.col-->
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card text-white bg-warning">
+                            <div class="card-body pb-0">
+                                <div><h5>Total inscrit en 3ieme annee</h5></div>
+                                <div class="text-value">
+                                    <h3 style="color:yellow">@Model.NbrTotal3</h3>
+
+                                    <small>@Model.NbrInfo3 Informatique</small><br />
+                                    <small>@Model.NbrIndus3 Industriels</small><br />
+                                    <small>@Model.NbrProcede3 Procedes</small><br />
+                                    <small>@Model.NbrTelecom3 Telecom</small>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.col-->
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card text-white bg-danger">
+                            <div class="card-body pb-0">
+                                <div><h5>Nombre total des utilisateurs</h5></div>
+                                <div class="text-value">
+                                    <h4 style="color:yellow">@Model.NbrTotal</h4>
+                                </div>
+                                <div><h5>Total supprimé en 3ieme annee</h5></div>
+                                <div class="text-value">
+                                    <h4 style="color:yellow">@Model.NbrTotalSupp3</h4>
+                                </div>
+                                <div><h5>Total supprimé en 4ieme annee</h5></div>
+                                <div class="text-value">
+                                    <h4 style="color:yellow">@Model.NbrTotalSupp4</h4>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.col-->
+                    <!-- /.col-->
+                </div>
+
+                <!-- /.row-->
+
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fa fa-align-justify"></i> Statistiques des etudiants <small>3ieme et 4ieme année</small>
+                            </div>
+
+                            <div class="card-body">
+
+                                <script>
+        window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer", {
+	        animationEnabled: true,
+	        theme: "light2", // "light1", "light2", "dark1", "dark2"
+	        title: {
+		        text: "Nombre des etudiants pour chaque filière"
+	        },
+	        axisY: {
+		        title: "N° Etudiants"
+	        },
+	        data: [{
+		        type: "column",
+		        dataPoints: @Html.Raw(Model.Datapoints)
+	        }]
+        });
+        chart.render();
+        }
+                                </script>
+                                <div class="col-xs-12">
+                                    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.col-->
+                </div>
+
+                <br />
+
+                @if (Model.Preselectionne3Info.Count() != 0 || Model.Preselectionne3Indus.Count() != 0 || Model.Preselectionne3Procede.Count() != 0 || Model.Preselectionne3Telecom.Count() != 0)
+                {
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">
+                                    <i class="fa fa-align-justify"></i> Liste des préselectionnés
+                                    <small>3ieme année</small>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="nav nav-tabs" id="myTab1" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="info3-tab" data-toggle="tab" href="#info3" role="tab" aria-controls="info3" aria-selected="true">Info</a>
+
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="indus3-tab" data-toggle="tab" href="#indus3" role="tab" aria-controls="indus3" aria-selected="true">Indus</a>
+
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="gpmc3-tab" data-toggle="tab" href="#gpmc3" role="tab" aria-controls="gpmc3" aria-selected="true">GPMC</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="gtr3-tab" data-toggle="tab" href="#gtr3" role="tab" aria-controls="gtr3" aria-selected="true">Telecom</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="info3" role="tabpanel" aria-labelledby="info3-tab">
+
+                                            <div class="table-responsive">
+
+                                                <table id="dataTables-info3" class="table table-striped table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th scope="col">Nom</th>
+                                                            <th scope="col">Prenom</th>
+                                                            <th scope="col">Cne</th>
+                                                            <th scope="col">Cin</th>
+                                                            <th scope="col">Email</th>
+                                                            <th scope="col">Civilite</th>
+                                                            <th scope="col">Nationnalite</th>
+                                                            <th scope="col">Tel</th>
+                                                            <th scope="col">Etablissement</th>
+                                                            <th scope="col">Filiere</th>
+                                                            <th scope="col">Bac</th>
+                                                            <th scope="col">S1</th>
+                                                            <th scope="col">S2</th>
+                                                            <th scope="col">S3</th>
+                                                            <th scope="col">S4</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var emp in Model.Preselectionne3Info)
+                                                        {
+
+                                                            <tr>
+
+                                                                <td>@emp.Etudiant.Nom</td>
+                                                                <td>@emp.Etudiant.Prenom</td>
+                                                                <td>@emp.Etudiant.Cne</td>
+                                                                <td>@emp.Etudiant.Cin</td>
+                                                                <td>@emp.Etudiant.Email</td>
+                                                                <td>@emp.Etudiant.Civilite</td>
+                                                                <td>@emp.Etudiant.Nationnalite</td>
+                                                                <td>@emp.Etudiant.Tel</td>
+                                                                <td>@emp.Etudiant.Etablissement</td>
+                                                                <td>@emp.Etudiant.Filiere.Titre</td>
+                                                                <td>@emp.Etudiant.Note.NoteBac</td>
+                                                                <td>@emp.Etudiant.Note.S1</td>
+                                                                <td>@emp.Etudiant.Note.S2</td>
+                                                                <td>@emp.Etudiant.Note.S3</td>
+                                                                <td>@emp.Etudiant.Note.S4</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                            <button onclick="exportTableToExcel('dataTables-info3', 'Liste des preselectionne 3A GI')" class="btn btn-success btn-sm">Exporter vers un fichier Excel</button>
+
+                                        </div>
+                                        <!-- Indus -->
+                                        <div class="tab-pane" id="indus3" role="tabpanel" aria-labelledby="indus3-tab">
+
+                                            <div class="table-responsive">
+
+                                                <table id="dataTables-indus3" class="table table-striped table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th scope="col">Nom</th>
+                                                            <th scope="col">Prenom</th>
+                                                            <th scope="col">Cne</th>
+                                                            <th scope="col">Cin</th>
+                                                            <th scope="col">Email</th>
+                                                            <th scope="col">Civilite</th>
+                                                            <th scope="col">Nationnalite</th>
+                                                            <th scope="col">Tel</th>
+                                                            <th scope="col">Etablissement</th>
+                                                            <th scope="col">Filiere</th>
+                                                            <th scope="col">Bac</th>
+                                                            <th scope="col">S1</th>
+                                                            <th scope="col">S2</th>
+                                                            <th scope="col">S3</th>
+                                                            <th scope="col">S4</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var emp in Model.Preselectionne3Indus)
+                                                        {
+
+                                                            <tr>
+
+                                                                <td>@emp.Etudiant.Nom</td>
+                                                                <td>@emp.Etudiant.Prenom</td>
+                                                                <td>@emp.Etudiant.Cne</td>
+                                                                <td>@emp.Etudiant.Cin</td>
+                                                                <td>@emp.Etudiant.Email</td>
+                                                                <td>@emp.Etudiant.Civilite</td>
+                                                                <td>@emp.Etudiant.Nationnalite</td>
+                                                                <td>@emp.Etudiant.Tel</td>
+                                                                <td>@emp.Etudiant.Etablissement</td>
+                                                                <td>@emp.Etudiant.Filiere.Titre</td>
+                                                                <td>@emp.Etudiant.Note.NoteBac</td>
+                                                                <td>@emp.Etudiant.Note.S1</td>
+                                                                <td>@emp.Etudiant.Note.S2</td>
+                                                                <td>@emp.Etudiant.Note.S3</td>
+                                                                <td>@emp.Etudiant.Note.S4</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                            <button onclick="exportTableToExcel('dataTables-indus3', 'Liste des preselectionne 3A Indus')" class="btn btn-success btn-sm">Exporter vers un fichier Excel</button>
+
+                                        </div>
+                                        <!-- GPMC -->
+                                        <div class="tab-pane" id="gpmc3" role="tabpanel" aria-labelledby="gpmc3-tab">
+
+                                            <div class="table-responsive">
+
+                                                <table id="dataTables-gpmc3" class="table table-striped table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th scope="col">Nom</th>
+                                                            <th scope="col">Prenom</th>
+                                                            <th scope="col">Cne</th>
+                                                            <th scope="col">Cin</th>
+                                                            <th scope="col">Email</th>
+                                                            <th scope="col">Civilite</th>
+                                                            <th scope="col">Nationnalite</th>
+                                                            <th scope="col">Tel</th>
+                                                            <th scope="col">Etablissement</th>
+                                                            <th scope="col">Filiere</th>
+                                                            <th scope="col">Bac</th>
+                                                            <th scope="col">S1</th>
+                                                            <th scope="col">S2</th>
+                                                            <th scope="col">S3</th>
+                                                            <th scope="col">S4</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var emp in Model.Preselectionne3Procede)
+                                                        {
+
+                                                            <tr>
+
+                                                                <td>@emp.Etudiant.Nom</td>
+                                                                <td>@emp.Etudiant.Prenom</td>
+                                                                <td>@emp.Etudiant.Cne</td>
+                                                                <td>@emp.Etudiant.Cin</td>
+                                                                <td>@emp.Etudiant.Email</td>
+                                                                <td>@emp.Etudiant.Civilite</td>
+                                                                <td>@emp.Etudiant.Nationnalite</td>
+                                                                <td>@emp.Etudiant.Tel</td>
+                                                                <td>@emp.Etudiant.Etablissement</td>
+                                                                <td>@emp.Etudiant.Filiere.Titre</td>
+                                                                <td>@emp.Etudiant.Note.NoteBac</td>
+                                                                <td>@emp.Etudiant.Note.S1</td>
+                                                                <td>@emp.Etudiant.Note.S2</td>
+                                                                <td>@emp.Etudiant.Note.S3</td>
+                                                                <td>@emp.Etudiant.Note.S4</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                            <button onclick="exportTableToExcel('dataTables-gpmc3', 'Liste des preselectionne 3A GPMC')" class="btn btn-success btn-sm">Exporter vers un fichier Excel</button>
+
+                                        </div>
+                                        <!-- GTR -->
+                                        <div class="tab-pane" id="gtr3" role="tabpanel" aria-labelledby="gtr3-tab">
+
+                                            <div class="table-responsive">
+
+                                                <table id="dataTables-gtr3" class="table table-striped table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th scope="col">Nom</th>
+                                                            <th scope="col">Prenom</th>
+                                                            <th scope="col">Cne</th>
+                                                            <th scope="col">Cin</th>
+                                                            <th scope="col">Email</th>
+                                                            <th scope="col">Civilite</th>
+                                                            <th scope="col">Nationnalite</th>
+                                                            <th scope="col">Tel</th>
+                                                            <th scope="col">Etablissement</th>
+                                                            <th scope="col">Filiere</th>
+                                                            <th scope="col">Bac</th>
+                                                            <th scope="col">S1</th>
+                                                            <th scope="col">S2</th>
+                                                            <th scope="col">S3</th>
+                                                            <th scope="col">S4</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var emp in Model.Preselectionne3Telecom)
+                                                        {
+
+                                                            <tr>
+
+                                                                <td>@emp.Etudiant.Nom</td>
+                                                                <td>@emp.Etudiant.Prenom</td>
+                                                                <td>@emp.Etudiant.Cne</td>
+                                                                <td>@emp.Etudiant.Cin</td>
+                                                                <td>@emp.Etudiant.Email</td>
+                                                                <td>@emp.Etudiant.Civilite</td>
+                                                                <td>@emp.Etudiant.Nationnalite</td>
+                                                                <td>@emp.Etudiant.Tel</td>
+                                                                <td>@emp.Etudiant.Etablissement</td>
+                                                                <td>@emp.Etudiant.Filiere.Titre</td>
+                                                                <td>@emp.Etudiant.Note.NoteBac</td>
+                                                                <td>@emp.Etudiant.Note.S1</td>
+                                                                <td>@emp.Etudiant.Note.S2</td>
+                                                                <td>@emp.Etudiant.Note.S3</td>
+                                                                <td>@emp.Etudiant.Note.S4</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                            <button onclick="exportTableToExcel('dataTables-gtr3', 'Liste des preselectionne 3A GTR')" class="btn btn-success btn-sm">Exporter vers un fichier Excel</button>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+                @if (Model.Preselectionne4Info.Count() != 0 || Model.Preselectionne4Indus.Count() != 0 || Model.Preselectionne4Procede.Count() != 0 || Model.Preselectionne4Telecom.Count() != 0)
+                {
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">
+                                    <i class="fa fa-align-justify"></i> Liste des préselectionnés
+                                    <small>4ieme année</small>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="nav nav-tabs" id="myTab1" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="info4-tab" data-toggle="tab" href="#info4" role="tab" aria-controls="info4" aria-selected="true">Info</a>
+
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="indus4-tab" data-toggle="tab" href="#indus4" role="tab" aria-controls="indus4" aria-selected="true">Indus</a>
+
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="gpmc4-tab" data-toggle="tab" href="#gpmc4" role="tab" aria-controls="gpmc4" aria-selected="true">GPMC</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="gtr4-tab" data-toggle="tab" href="#gtr4" role="tab" aria-controls="gtr4" aria-selected="true">Telecom</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="info4" role="tabpanel" aria-labelledby="info4-tab">
+
+                                            <div class="table-responsive">
+
+                                                <table id="dataTables-info4" class="table table-striped table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th scope="col">Nom</th>
+                                                            <th scope="col">Prenom</th>
+                                                            <th scope="col">Cne</th>
+                                                            <th scope="col">Cin</th>
+                                                            <th scope="col">Email</th>
+                                                            <th scope="col">Civilite</th>
+                                                            <th scope="col">Nationnalite</th>
+                                                            <th scope="col">Tel</th>
+                                                            <th scope="col">Etablissement</th>
+                                                            <th scope="col">Filiere</th>
+                                                            <th scope="col">Bac</th>
+                                                            <th scope="col">S1</th>
+                                                            <th scope="col">S2</th>
+                                                            <th scope="col">S3</th>
+                                                            <th scope="col">S4</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var emp in Model.Preselectionne4Info)
+                                                        {
+
+                                                            <tr>
+
+                                                                <td>@emp.Etudiant.Nom</td>
+                                                                <td>@emp.Etudiant.Prenom</td>
+                                                                <td>@emp.Etudiant.Cne</td>
+                                                                <td>@emp.Etudiant.Cin</td>
+                                                                <td>@emp.Etudiant.Email</td>
+                                                                <td>@emp.Etudiant.Civilite</td>
+                                                                <td>@emp.Etudiant.Nationnalite</td>
+                                                                <td>@emp.Etudiant.Tel</td>
+                                                                <td>@emp.Etudiant.Etablissement</td>
+                                                                <td>@emp.Etudiant.Filiere.Titre</td>
+                                                                <td>@emp.Etudiant.Note.NoteBac</td>
+                                                                <td>@emp.Etudiant.Note.S1</td>
+                                                                <td>@emp.Etudiant.Note.S2</td>
+                                                                <td>@emp.Etudiant.Note.S3</td>
+                                                                <td>@emp.Etudiant.Note.S4</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                            <button onclick="exportTableToExcel('dataTables-info4', 'Liste des preselectionne 4A GI')" class="btn btn-success btn-sm">Exporter vers un fichier Excel</button>
+
+                                        </div>
+                                        <!-- Indus -->
+                                        <div class="tab-pane" id="indus4" role="tabpanel" aria-labelledby="indus4-tab">
+
+                                            <div class="table-responsive">
+
+                                                <table id="dataTables-indus4" class="table table-striped table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th scope="col">Nom</th>
+                                                            <th scope="col">Prenom</th>
+                                                            <th scope="col">Cne</th>
+                                                            <th scope="col">Cin</th>
+                                                            <th scope="col">Email</th>
+                                                            <th scope="col">Civilite</th>
+                                                            <th scope="col">Nationnalite</th>
+                                                            <th scope="col">Tel</th>
+                                                            <th scope="col">Etablissement</th>
+                                                            <th scope="col">Filiere</th>
+                                                            <th scope="col">Bac</th>
+                                                            <th scope="col">S1</th>
+                                                            <th scope="col">S2</th>
+                                                            <th scope="col">S3</th>
+                                                            <th scope="col">S4</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var emp in Model.Preselectionne4Indus)
+                                                        {
+
+                                                            <tr>
+
+                                                                <td>@emp.Etudiant.Nom</td>
+                                                                <td>@emp.Etudiant.Prenom</td>
+                                                                <td>@emp.Etudiant.Cne</td>
+                                                                <td>@emp.Etudiant.Cin</td>
+                                                                <td>@emp.Etudiant.Email</td>
+                                                                <td>@emp.Etudiant.Civilite</td>
+                                                                <td>@emp.Etudiant.Nationnalite</td>
+                                                                <td>@emp.Etudiant.Tel</td>
+                                                                <td>@emp.Etudiant.Etablissement</td>
+                                                                <td>@emp.Etudiant.Filiere.Titre</td>
+                                                                <td>@emp.Etudiant.Note.NoteBac</td>
+                                                                <td>@emp.Etudiant.Note.S1</td>
+                                                                <td>@emp.Etudiant.Note.S2</td>
+                                                                <td>@emp.Etudiant.Note.S3</td>
+                                                                <td>@emp.Etudiant.Note.S4</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                            <button onclick="exportTableToExcel('dataTables-indus4', 'Liste des preselectionne 4A Indus')" class="btn btn-success btn-sm">Exporter vers un fichier Excel</button>
+
+                                        </div>
+                                        <!-- GPMC -->
+                                        <div class="tab-pane" id="gpmc4" role="tabpanel" aria-labelledby="gpmc4-tab">
+
+                                            <div class="table-responsive">
+
+                                                <table id="dataTables-gpmc4" class="table table-striped table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th scope="col">Nom</th>
+                                                            <th scope="col">Prenom</th>
+                                                            <th scope="col">Cne</th>
+                                                            <th scope="col">Cin</th>
+                                                            <th scope="col">Email</th>
+                                                            <th scope="col">Civilite</th>
+                                                            <th scope="col">Nationnalite</th>
+                                                            <th scope="col">Tel</th>
+                                                            <th scope="col">Etablissement</th>
+                                                            <th scope="col">Filiere</th>
+                                                            <th scope="col">Bac</th>
+                                                            <th scope="col">S1</th>
+                                                            <th scope="col">S2</th>
+                                                            <th scope="col">S3</th>
+                                                            <th scope="col">S4</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var emp in Model.Preselectionne4Procede)
+                                                        {
+
+                                                            <tr>
+
+                                                                <td>@emp.Etudiant.Nom</td>
+                                                                <td>@emp.Etudiant.Prenom</td>
+                                                                <td>@emp.Etudiant.Cne</td>
+                                                                <td>@emp.Etudiant.Cin</td>
+                                                                <td>@emp.Etudiant.Email</td>
+                                                                <td>@emp.Etudiant.Civilite</td>
+                                                                <td>@emp.Etudiant.Nationnalite</td>
+                                                                <td>@emp.Etudiant.Tel</td>
+                                                                <td>@emp.Etudiant.Etablissement</td>
+                                                                <td>@emp.Etudiant.Filiere.Titre</td>
+                                                                <td>@emp.Etudiant.Note.NoteBac</td>
+                                                                <td>@emp.Etudiant.Note.S1</td>
+                                                                <td>@emp.Etudiant.Note.S2</td>
+                                                                <td>@emp.Etudiant.Note.S3</td>
+                                                                <td>@emp.Etudiant.Note.S4</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                            <button onclick="exportTableToExcel('dataTables-gpmc4', 'Liste des preselectionne 4A GPMC')" class="btn btn-success btn-sm">Exporter vers un fichier Excel</button>
+
+                                        </div>
+                                        <!-- GTR -->
+                                        <div class="tab-pane" id="gtr4" role="tabpanel" aria-labelledby="gtr4-tab">
+
+                                            <div class="table-responsive">
+
+                                                <table id="dataTables-gtr4" class="table table-striped table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th scope="col">Nom</th>
+                                                            <th scope="col">Prenom</th>
+                                                            <th scope="col">Cne</th>
+                                                            <th scope="col">Cin</th>
+                                                            <th scope="col">Email</th>
+                                                            <th scope="col">Civilite</th>
+                                                            <th scope="col">Nationnalite</th>
+                                                            <th scope="col">Tel</th>
+                                                            <th scope="col">Etablissement</th>
+                                                            <th scope="col">Filiere</th>
+                                                            <th scope="col">Bac</th>
+                                                            <th scope="col">S1</th>
+                                                            <th scope="col">S2</th>
+                                                            <th scope="col">S3</th>
+                                                            <th scope="col">S4</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var emp in Model.Preselectionne4Telecom)
+                                                        {
+
+                                                            <tr>
+
+                                                                <td>@emp.Etudiant.Nom</td>
+                                                                <td>@emp.Etudiant.Prenom</td>
+                                                                <td>@emp.Etudiant.Cne</td>
+                                                                <td>@emp.Etudiant.Cin</td>
+                                                                <td>@emp.Etudiant.Email</td>
+                                                                <td>@emp.Etudiant.Civilite</td>
+                                                                <td>@emp.Etudiant.Nationnalite</td>
+                                                                <td>@emp.Etudiant.Tel</td>
+                                                                <td>@emp.Etudiant.Etablissement</td>
+                                                                <td>@emp.Etudiant.Filiere.Titre</td>
+                                                                <td>@emp.Etudiant.Note.NoteBac</td>
+                                                                <td>@emp.Etudiant.Note.S1</td>
+                                                                <td>@emp.Etudiant.Note.S2</td>
+                                                                <td>@emp.Etudiant.Note.S3</td>
+                                                                <td>@emp.Etudiant.Note.S4</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                            <button onclick="exportTableToExcel('dataTables-gtr4', 'Liste des preselectionne 4A GTR')" class="btn btn-success btn-sm">Exporter vers un fichier Excel</button>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+                <!--/.row-->
+                <!-- /. ROW  -->
+                <!-- chart  -->
+                <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+                <!-- /.row-->
+            </div>
+    </div>
+</main>
+
+
+
+
+
+
+

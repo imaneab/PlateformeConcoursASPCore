@@ -1,0 +1,133 @@
+﻿<main class="main">
+    <!-- Breadcrumb-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">Acceuil</li>
+        <li class="breadcrumb-item">
+            <a href="/Admin/Etudiant3a/GetAllCondidatData">Anciens epreuves</a>
+        </li>
+        <li class="breadcrumb-item active">Ajouter épreuve</li>
+        <!-- Breadcrumb Menu-->
+        <li class="breadcrumb-menu d-md-down-none">
+            <div class="btn-group" role="group" aria-label="Button group">
+                <a class="btn" href="#">
+                    <i class="icon-speech"></i>
+                </a>
+                <a class="btn" href="./">
+                    <i class="icon-graph"></i>  Acceuil
+                </a>
+                <a class="btn" href="#">
+                    <i class="icon-settings"></i>  Paramètres
+                </a>
+            </div>
+        </li>
+    </ol>
+    <div class="container-fluid">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-file"></i>Ajouter  <b>une épreuve</b>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="col-xs-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="card-title">
+                                            <div class="title"></div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+
+
+                                        <div class="table-responsive">
+
+
+
+
+
+                                            @using (Html.BeginForm("AddFile", "File",
+                                                       FormMethod.Post, new { id = "attachment", enctype = "multipart/form-data", encoding = "multipart/form-data" }))
+                                            {
+
+                                                <div>
+                                                    <label for="exampleInputFile">Nom de la filiére :</label>
+                                                    @Html.DropDownList("ID", ViewBag.filiere as SelectList, new { @class = "form-control", style = "width:480px", required = "required" })
+                                                    <label id="listError" class="text-danger"></label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div>
+                                                        <label for="inputdefault">Titre épreuve :</label>
+                                                        <input class="form-control" id="titre" type="text" placeholder="Titre..." name="Titre_concours" style="width:480px" required>
+                                                        <label id="titre-error" class="text-danger"></label>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <div>
+                                                        <label for="inputdefault">Année de concours :</label>
+                                                        <input class="form-control" id="date" type="text" placeholder="Année..." name="Annee" style="width:480px" required>
+                                                        <label id="Date-error" class="text-danger"></label>
+                                                    </div>
+                                                </div>
+
+                                                <label for="exampleInputFile">Télécharger un fichier: </label>
+
+                                                <input multiple type="file" name="Upfile" id="Upfile" style="width:480px" accept=".pdf" required /><br /><br />
+
+                                            }
+
+                                            <input onclick="submit()" class="btn btn-info" value="Télécharger" type="button" />
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<script type="text/javascript">
+    function submit() {
+        var currentYear = (new Date).getFullYear();
+        var intRegex = /^\d+$/;
+        var valid = true;
+        $(document).ready(function () {
+
+            if (!$("#titre").val()) {
+                $("#titre-error").text("Please fill in the title!");
+                valid = false;
+            }
+            if (!$("#date").val()) {
+                $("#Date-error").text("Please fill in the date!");
+                valid = false;
+            } else {
+                if ($("#date").val() > currentYear) {
+                    $("#Date-error").text("Please enter a date inferior than this year");
+                    valid = false;
+                }
+                if (!intRegex.test($("#date").val()) || $("#date").val() < 0) {
+                    $("#Date-error").text("Please enter a valid Date");
+                    valid = false;
+                }
+            }
+
+
+
+
+            if (valid) {
+                $("#attachment").submit();
+            }
+
+        });
+    }
+
+</script>

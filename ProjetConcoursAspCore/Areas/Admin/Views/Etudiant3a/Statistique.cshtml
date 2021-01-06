@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewData["Title"] = "Statistique";
+}
+<main class="main">
+    <!-- Breadcrumb-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">Acceuil</li>
+        <li class="breadcrumb-item">
+            <a href="/Admin/Etudiant3a/GetAllCondidatData">3ieme année</a>
+        </li>
+        <li class="breadcrumb-item active">Statistiques</li>
+        <!-- Breadcrumb Menu-->
+        <li class="breadcrumb-menu d-md-down-none">
+            <div class="btn-group" role="group" aria-label="Button group">
+                <a class="btn" href="#">
+                    <i class="icon-speech"></i>
+                </a>
+                <a class="btn" href="./">
+                    <i class="icon-graph"></i>  Acceuil
+                </a>
+                <a class="btn" href="#">
+                    <i class="icon-settings"></i>  Paramètres
+                </a>
+            </div>
+        </li>
+    </ol>
+    <div class="container-fluid">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-align-justify"></i> Afficher les statistiques
+                        </div>
+
+                        <div class="card-body">
+
+                            <h3> Liste Des Préinscrit AU CONCOURS 3eme Année Ensa SAFI</h3><br />
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">DUT</th>
+                                        <th scope="col">DEUG</th>
+                                        <th scope="col">DEUST</th>
+                                        <th scope="col">LICENCE PRO</th>
+                                        <th scope="col">LICENCE LFND</th>
+                                        <th scope="col">TOTALE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-primary" style="background-color:aquamarine">
+                                        <th scope="row">GENIE INFORMATIQUE</th>
+                                        <td>@ViewData["NombreGINFDUT"]</td>
+                                        <td>@ViewData["NombreGINFDEUG"]</td>
+                                        <td>@ViewData["NombreGINFDEUST"]</td>
+                                        <td>@ViewData["NombreGINFLP"]</td>
+                                        <td>@ViewData["NombreGINFLF"]</td>
+                                        <td>@ViewData["TotalGINF"]</td>
+
+                                    </tr>
+                                    <tr class="table-secondary" style="background-color:aquamarine">
+                                        <th scope="row">GENIE TELECOM ET RESEAU</th>
+                                        <td>@ViewData["NombreGTRDUT"]</td>
+                                        <td>@ViewData["NombreGTRDEUG"]</td>
+                                        <td>@ViewData["NombreGTRDEUST"]</td>
+                                        <td>@ViewData["NombreGTRLP"]</td>
+                                        <td>@ViewData["NombreGTRLF"]</td>
+                                        <td>@ViewData["TotalGTR"]</td>
+                                    </tr>
+                                    <tr class="table-success" style="background-color:cornflowerblue">
+                                        <th scope="row">GENIE INDUSTRIEL</th>
+                                        <td>@ViewData["NombreGINDDUT"]</td>
+                                        <td>@ViewData["NombreGINDDEUG"]</td>
+                                        <td>@ViewData["NombreGINDDEUST"]</td>
+                                        <td>@ViewData["NombreGINDLP"]</td>
+                                        <td>@ViewData["NombreGINDLF"]</td>
+                                        <td>@ViewData["TotalGIND"]</td>
+                                    </tr>
+                                    <tr class="table-info" style="background-color:cornflowerblue">
+                                        <th scope="row">GENIE DES PROCEDES ET MC</th>
+                                        <td>@ViewData["NombreGPMCDUT"]</td>
+                                        <td>@ViewData["NombreGPMCDEUG"]</td>
+                                        <td>@ViewData["NombreGPMCDEUST"]</td>
+                                        <td>@ViewData["NombreGPMCLP"]</td>
+                                        <td>@ViewData["NombreGPMCLF"]</td>
+                                        <td>@ViewData["TotalGPMC"]</td>
+                                    </tr>
+                                    <tr class="table-info" style="background-color:papayawhip">
+                                        <th scope="row">Total Préinscrit</th>
+                                        <td>@ViewData["TotalPreinsDUT"]</td>
+                                        <td>@ViewData["TotalPreinsDEUG"]</td>
+                                        <td>@ViewData["TotalPreinsDEUST"]</td>
+                                        <td>@ViewData["TotalPreinsLP"]</td>
+                                        <td>@ViewData["TotalPreinsLF"]</td>
+                                        <td>@ViewData["TotalPreinscrit"]</td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3> Liste Des Convoque AU CONCOURS 3eme Année Ensa SAFI</h3><br />
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">DUT</th>
+                                        <th scope="col">DEUG</th>
+                                        <th scope="col">DEUST</th>
+                                        <th scope="col">LICENCE PRO</th>
+                                        <th scope="col">LICENCE LFND</th>
+                                        <th scope="col">TOTALE</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-primary" style="background-color:aquamarine">
+                                        <th scope="row">GENIE INFORMATIQUE</th>
+                                        <td>@ViewData["NombreGINFDUTC"]</td>
+                                        <td>@ViewData["NombreGINFDEUGC"]</td>
+                                        <td>@ViewData["NombreGINFDEUSTC"]</td>
+                                        <td>@ViewData["NombreGINFLPC"]</td>
+                                        <td>@ViewData["NombreGINFLFC"]</td>
+                                        <td>@ViewData["TotalGINFC"]</td>
+
+                                    </tr>
+                                    <tr class="table-secondary" style="background-color:aquamarine">
+                                        <th scope="row">GENIE TELECOM ET RESEAU</th>
+                                        <td>@ViewData["NombreGTRDUTC"]</td>
+                                        <td>@ViewData["NombreGTRDEUGC"]</td>
+                                        <td>@ViewData["NombreGTRDEUSTC"]</td>
+                                        <td>@ViewData["NombreGTRLPC"]</td>
+                                        <td>@ViewData["NombreGTRLFC"]</td>
+                                        <td>@ViewData["TotalGTRC"]</td>
+                                    </tr>
+                                    <tr class="table-success" style="background-color:cornflowerblue">
+                                        <th scope="row">GENIE INDUSTRIEL</th>
+                                        <td>@ViewData["NombreGINDDUTC"]</td>
+                                        <td>@ViewData["NombreGINDDEUGC"]</td>
+                                        <td>@ViewData["NombreGINDDEUSTC"]</td>
+                                        <td>@ViewData["NombreGINDLPC"]</td>
+                                        <td>@ViewData["NombreGINDLFC"]</td>
+                                        <td>@ViewData["TotalGINDC"]</td>
+                                    </tr>
+                                    <tr class="table-info" style="background-color:cornflowerblue">
+                                        <th scope="row">GENIE DES PROCEDES ET MC</th>
+                                        <td>@ViewData["NombreGPMCDUTC"]</td>
+                                        <td>@ViewData["NombreGPMCDEUGC"]</td>
+                                        <td>@ViewData["NombreGPMCDEUSTC"]</td>
+                                        <td>@ViewData["NombreGPMCLPC"]</td>
+                                        <td>@ViewData["NombreGPMCLFC"]</td>
+                                        <td>@ViewData["TotalGPMCC"]</td>
+                                    </tr>
+                                    <tr class="table-info" style="background-color:papayawhip">
+                                        <th scope="row">Total Convoque</th>
+                                        <td>@ViewData["TotalConvoqueDUT"]</td>
+                                        <td>@ViewData["TotalConvoqueDEUG"]</td>
+                                        <td>@ViewData["TotalConvoqueDEUST"]</td>
+                                        <td>@ViewData["TotalConvoqueLP"]</td>
+                                        <td>@ViewData["TotalConvoqueLF"]</td>
+                                        <td>@ViewData["TotalConvoque"]</td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+
+                            <br />
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-->
+            </div>
+        </div>
+    </div>
+</main>
+

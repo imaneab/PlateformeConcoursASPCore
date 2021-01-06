@@ -1,0 +1,13 @@
+﻿
+@model EmailService.ViewModel.PreselectionViewModel
+@{
+    ViewData["Title"] = "accepted";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<h2>Bonjour @Model.FullName</h2>
+<p>
+    Nous voulons vous informer que vous avez été sélectionné pour passer le concour d'accés au @Model.Filiere, consultez le site Web pour plus de détails.
+</p>
+<p>Cordialement.</p>
+

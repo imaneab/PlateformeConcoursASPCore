@@ -1,0 +1,107 @@
+﻿
+@model ProjetConcoursAspCore.Models.Etudiant4a
+
+<main class="main">
+    <!-- Breadcrumb-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">Acceuil</li>
+        <li class="breadcrumb-item">
+            <a href="/Admin/Etudiant3a/GetAllCondidatData">4ieme année</a>
+        </li>
+        <li class="breadcrumb-item active">Affecter N° dossier</li>
+        <!-- Breadcrumb Menu-->
+        <li class="breadcrumb-menu d-md-down-none">
+            <div class="btn-group" role="group" aria-label="Button group">
+                <a class="btn" href="#">
+                    <i class="icon-speech"></i>
+                </a>
+                <a class="btn" href="./">
+                    <i class="icon-graph"></i>  Acceuil
+                </a>
+                <a class="btn" href="#">
+                    <i class="icon-settings"></i>  Paramètres
+                </a>
+            </div>
+        </li>
+    </ol>
+    <div class="container-fluid">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-check"></i> Affecter N° dossier  <b>@Model.Etudiant.Nom @Model.Etudiant.Prenom</b>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="col-xs-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="card-title">
+                                            <div class="title">Vous etes sur que vous voulez affecter N° dossier à <b>@Model.Etudiant.Nom @Model.Etudiant.Prenom ?</b></div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col"></th>
+                                                    <th scope="col">Informations</th>
+
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row"> @Html.DisplayNameFor(model => model.Etudiant.Cin)</th>
+                                                    <td> @Html.DisplayFor(model => model.Etudiant.Cin)</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"> @Html.DisplayNameFor(model => model.Etudiant.Cne)</th>
+                                                    <td> @Html.DisplayFor(model => model.Etudiant.Cne)</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">@Html.DisplayNameFor(model => model.Etudiant.Nom)</th>
+                                                    <td> @Html.DisplayFor(model => model.Etudiant.Nom)</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">@Html.DisplayNameFor(model => model.Etudiant.Prenom)</th>
+                                                    <td>@Html.DisplayFor(model => model.Etudiant.Prenom)</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">@Html.DisplayNameFor(model => model.Etudiant.Filiere.Titre)</th>
+                                                    <td>@Html.DisplayFor(model => model.Etudiant.Filiere.Titre)</td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div>
+
+                                            <hr />
+
+
+                                            @using (Html.BeginForm())
+                                            {
+                                                @Html.AntiForgeryToken()
+
+                                                <div class="form-actions no-color">
+                                                    <input type="submit" value="Affecter" class="btn btn-success" /> |
+                                                    @Html.ActionLink("Revenir à la liste", "AffecterNumDossier")
+                                                </div>
+                                            }
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

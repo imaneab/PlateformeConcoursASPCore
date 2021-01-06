@@ -1,0 +1,139 @@
+﻿
+<script>
+    function exportTableToExcel(tableID, filename = '') {
+        var downloadLink;
+        var dataType = 'application/vnd.ms-excel';
+        var tableSelect = document.getElementById(tableID);
+        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+        // Specify file name
+        filename = filename ? filename + '.xls' : 'excel_data.xls';
+
+        // Create download link element
+        downloadLink = document.createElement("a");
+
+        document.body.appendChild(downloadLink);
+
+        if (navigator.msSaveOrOpenBlob) {
+            var blob = new Blob(['\ufeff', tableHTML], {
+                type: dataType
+            });
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            // Create a link to the file
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+            // Setting the file name
+            downloadLink.download = filename;
+
+            //triggering the function
+            downloadLink.click();
+        }
+    }
+</script>
+<script src="~/js/jquery.table2excel.js"></script>
+<script src="~/js/jquery.table2excel.js"></script>
+
+<main class="main">
+    <!-- Breadcrumb-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">Acceuil</li>
+        <li class="breadcrumb-item">
+            <a href="/Admin/Etudiant4a/GetAllCondidatData">4ieme année</a>
+        </li>
+        <li class="breadcrumb-item active">Preselection</li>
+        <!-- Breadcrumb Menu-->
+        <li class="breadcrumb-menu d-md-down-none">
+            <div class="btn-group" role="group" aria-label="Button group">
+                <a class="btn" href="#">
+                    <i class="icon-speech"></i>
+                </a>
+                <a class="btn" href="./">
+                    <i class="icon-graph"></i>  Acceuil
+                </a>
+                <a class="btn" href="#">
+                    <i class="icon-settings"></i>  Paramètres
+                </a>
+            </div>
+        </li>
+    </ol>
+    <div class="container-fluid">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-align-justify"></i> Liste des preselectionné <small>Diplome : @ViewBag.type</small>
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="table-responsive">
+                                <div id="dvTable">
+
+                                    <table id="EmployeeListe" class="table table-striped table-bordered table-hover">
+
+
+
+                                        <thead>
+                                            <tr>
+
+                                                <th scope="col">Nom</th>
+                                                <th scope="col">Prenom</th>
+                                                <th scope="col">Cne</th>
+                                                <th scope="col">Cin</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Civilite</th>
+                                                <th scope="col">Nationnalite</th>
+                                                <th scope="col">Tel</th>
+                                                <th scope="col">Etablissement</th>
+                                                <th scope="col">Filiere</th>
+                                                <th scope="col">Bac</th>
+                                                <th scope="col">S1</th>
+                                                <th scope="col">S2</th>
+                                                <th scope="col">S3</th>
+                                                <th scope="col">S4</th>
+                                                <th scope="col">S5</th>
+                                                <th scope="col">S6</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var emp in Model)
+                                            {
+                                            <tr>
+
+                                                <td>@emp.Nom</td>
+                                                <td>@emp.Prenom</td>
+                                                <td>@emp.Cne</td>
+                                                <td>@emp.Cin</td>
+                                                <td>@emp.Email</td>
+                                                <td>@emp.Civilite</td>
+                                                <td>@emp.Nationnalite</td>
+                                                <td>@emp.Tel</td>
+                                                <td>@emp.Etablissement</td>
+                                                <td>@emp.Filiere.Titre</td>
+                                                <td>@emp.Note.NoteBac</td>
+                                                <td>@emp.Note.S1</td>
+                                                <td>@emp.Note.S2</td>
+                                                <td>@emp.Note.S3</td>
+                                                <td>@emp.Note.S4</td>
+                                                <td>@emp.Note.S5</td>
+                                                <td>@emp.Note.S6</td>
+                                            </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <button onclick="exportTableToExcel('EmployeeListe', 'Liste des preselectionne 3A @ViewBag.type')" class="btn btn-success btn-sm">Exporter vers un fichier Excel</button>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-->
+            </div>
+        </div>
+    </div>
+</main>
+

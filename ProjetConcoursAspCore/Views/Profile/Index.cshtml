@@ -1,0 +1,319 @@
+﻿@model ProjetConcoursAspCore.Models.Etudiant
+@{
+    ViewData["Title"] = "Profile | " + Model.NomComplet;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <h4>Bonjour <b>@Model.NomComplet</b></h4>
+    </div>
+    <div class="row">
+        <form enctype="multipart/form-data" , asp-action="Edit">
+            <div id="msform">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <!-- fieldsets -->
+                <fieldset>
+                    <div class="col-md-6 col-12">
+                        @if (@Model.picture != null)
+                        {
+                            <div class="col-6 col-md-4">
+                                <img src="/uploads/@Model.picture" class="w-100" style="object-fit:cover;" />
+                            </div>
+                        }
+                        else
+                        {
+                            <span>
+                                vous n'avez pas encore téléchargé votre photo.
+                            </span>
+                        }
+                    </div>
+                    <h2 class="fs-title" style="color:#FDBE34">Personal Details</h2>
+                    <h3 class="fs-subtitle">Informations personnelles</h3>
+                    <input asp-for="ID" type="hidden" value="@Model.ID" />
+                    <div class="row">
+                        <div class=" col-md-6 col-12 form-group">
+                            <input required asp-for="Nom" placeholder="Nom" class="form-control" />
+                            <span asp-validation-for="Nom" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 col-12 form-group">
+                            <input required asp-for="Prenom" placeholder="Péenom" class="form-control" />
+                            <span asp-validation-for="Prenom" class="text-danger"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-12 form-group">
+                            <input required disabled asp-for="Cne" placeholder="Enter Cne" class="form-control" />
+                            <span asp-validation-for="Cne" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 col-12 form-group">
+                            <input required disabled asp-for="Cin" placeholder="Enter Cin" class="form-control" />
+                            <span asp-validation-for="Cin" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-12 form-group">
+                            <input required asp-for="Tel" placeholder="Tel" class="form-control" />
+                            <span asp-validation-for="Tel" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 col-12 form-group">
+                            <input required asp-for="Email" placeholder="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-md-6 col-12 form-group">
+                            <input asp-for="Nationnalite" placeholder="Nationnalite" class="form-control" />
+                            <span asp-validation-for="Nationnalite" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6 col-12 form-group">
+                            <input asp-for="Civilite" placeholder="Civilite" class="form-control" />
+                            <span asp-validation-for="Civilite" class="text-danger"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-6 col-12 form-group">
+                            <input type="date" asp-for="DateNaiss" placeholder="DateNaiss" class="form-control" />
+                            <span asp-validation-for="DateNaiss" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6 col-12 form-group">
+                            <input asp-for="Etablissement" placeholder="Etablissement" class="form-control" />
+                            <span asp-validation-for="Etablissement" class="text-danger"></span>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <h2 class="fs-title" style="color:#FDBE34">Filière</h2>
+                    <h3 class="fs-subtitle">
+                        Choisissez votre filière
+                    </h3>
+
+                    <div class="row">
+                        <div class="col-12 form-group col-md-6">
+                            <select name="x" class="form-control">
+                                @foreach (var el in (ViewBag.ListFil as List<Filiere>))
+                                {
+                                    <option selected="@(el.ID == Model.Filiere.ID)" value="@el.ID">@el.Titre</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+
+
+
+
+
+                <fieldset>
+                    <h2 class="fs-title" style="color:#FDBE34">Relevés de notes et diplômes universitaires</h2>
+                    <h3 class="fs-subtitle">
+                        Plus d'information
+                    </h3>
+
+                    <div class="row">
+                        <div class="col-md-6 col-12 form-group">
+                            <input asp-for="@Model.Note.NoteBac" step="0.01" placeholder="Note Bac" class="form-control" />
+                            <span asp-validation-for="@Model.Note.NoteBac" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6 col-12 form-group">
+                            <input asp-for="@Model.Diplome.AnneeBac" placeholder="Date bac" class="form-control" />
+                            <span asp-validation-for="@Model.Diplome.AnneeBac" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6 col-12">
+                            <span>Choix d'année : </span>
+                            <h3>
+                                @(Model.Etudiants3a.Where(e3 => e3.EtudiantId == Model.ID).FirstOrDefault() != null? "3éme année" : "4éme année")
+                            </h3>
+                            @*@Html.DropDownList("Choixdannee", new List<SelectListItem>
+        {
+            new SelectListItem{Text="3éme année",Value="3eme", Selected=Model.Etudiants3a.Where(e3=>e3.EtudiantId==Model.ID).FirstOrDefault()!=null },
+            new SelectListItem{Text="4éme année",Value="4eme",Selected=Model.Etudiants4a.Where(e3=>e3.EtudiantId==Model.ID).FirstOrDefault()!=null }
+        },  new { @class = "form-control", id = "choixdannee" })*@
+                        </div>
+
+            <div class="col-md-6 col-12">
+                <select required name="Diplome.Titre" placeholder="DateNaiss" class="form-control" id="type-diplome">
+                    @if (Model.Etudiants3a.Where(e3 => e3.EtudiantId == Model.ID).FirstOrDefault() != null)
+                    {
+                        <option selected='@(Model.Diplome!=null && Model.Diplome.Titre.Equals("DUT"))' value="DUT">DUT</option>
+                        <option selected='@(Model.Diplome!=null &&Model.Diplome.Titre.Equals("DEUST"))' value="DEUST">DEUST</option>
+                        <option selected='@(Model.Diplome!=null && Model.Diplome.Titre.Equals("DEUG"))' value="DEUG">DEUG</option>
+                    }
+                    else
+                    {
+                        <option selected='@(Model.Diplome!=null && Model.Diplome.Titre.Equals("LP"))' value="LP">LP</option>
+                        <option selected='@(Model.Diplome!=null &&Model.Diplome.Titre.Equals("LF"))' value="LF">LF</option>
+                        <option selected='@(Model.Diplome!=null && Model.Diplome.Titre.Equals("LST"))' value="LST">LST</option>
+                    }
+                </select>
+            </div>
+
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-6 col-12">
+                <span>Vos diplômes <small>(ne le modifiez pas si vous souhaitez conserver l'ancien document)</small></span>
+                <input name="file" multiple class="form-control" id="file" type="file">
+                <a target="_blank" class="btn btn-primary" href="/uploads/@Model.Diplome.fichier">Afficher vos documents</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-12">
+                <span>Votre photo <small>(ne le modifiez pas si vous souhaitez conserver l'ancien document)</small></span>
+                <input name="photo" multiple class="form-control" id="photo" type="file" accept="image/*">
+                @if (@Model.picture != null)
+                {
+                    <div class="col-6 col-md-4">
+                        <img src="/uploads/@Model.picture" class="w-100" style="object-fit:cover;" />
+                    </div>
+                }
+                else
+                {
+                    <span>
+                        vous n'avez pas encore téléchargé votre photo.
+                    </span>
+                }
+            </div>
+        </div>
+
+        <table class="table table-striped table-responsive-sm btn-table">
+
+            <thead>
+                <tr>
+                    <th>Annee</th>
+                    <th>Redoublement</th>
+                    <th style="text-align:center">Note Semestre</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.EditorFor(model => model.Diplome.Annee1, new { htmlAttributes = new { @class = "form-control", type = "number", placeholder = "Annee1", @value = Model.Note.NoteBac } })
+                        @Html.ValidationMessageFor(model => model.Diplome.Annee1, "", new { @class = "text-danger", @value = Model.Diplome.AnneeBac })
+                    </td>
+                    <td>
+                        <div class="form-group text-center">
+                            <div class="col-md-12 m-auto d-flex align-items-center">
+                                <label class="radio-inline">
+                                    Oui @Html.RadioButtonFor(model => model.Note.Redoublant1, true)
+                                </label>
+                                <label class="radio-inline">
+                                    Non @Html.RadioButtonFor(model => model.Note.Redoublant1, false)
+                                </label>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="row">
+                            <div class="col-md-6 m-auto">
+                                @Html.EditorFor(model => model.Note.S1, new { htmlAttributes = new { @class = "form-control", type = "number", placeholder = "Note S1", @step = "0.01" } })
+                                @Html.ValidationMessageFor(model => model.Note.S1, "", new { @class = "text-danger" })
+                                <label style="display:none;" class="text-danger" id="input8"></label>
+                            </div>
+                            <div class="col-md-6 m-auto">
+                                @Html.EditorFor(model => model.Note.S2, new { htmlAttributes = new { @class = "form-control", type = "number", placeholder = "Note S2", @step = "0.01" } })
+                                @Html.ValidationMessageFor(model => model.Note.S2, "", new { @class = "text-danger" })
+                                <label style="display:none;" class="text-danger" id="input9"></label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.EditorFor(model => model.Diplome.Annee2, new { htmlAttributes = new { @class = "form-control", type = "number", placeholder = "Annee2" } })
+                        @Html.ValidationMessageFor(model => model.Diplome.Annee2, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        <div class="form-group text-center">
+                            <div class="col-md-12 m-auto">
+                                <label class="radio-inline">
+                                    Oui @Html.RadioButtonFor(model => model.Note.Redoublant2, true)
+                                </label>
+                                <label class="radio-inline">
+                                    Non @Html.RadioButtonFor(model => model.Note.Redoublant2, false)
+                                </label>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="row">
+                            <div class="col-md-6 m-auto">
+                                @Html.EditorFor(model => model.Note.S3, new { htmlAttributes = new { @class = "form-control", type = "number", placeholder = "Note S3", @step = "0.01" } })
+                                @Html.ValidationMessageFor(model => model.Note.S3, "", new { @class = "text-danger" })
+                                <label style="display:none;" class="text-danger" id="input10"></label>
+                            </div>
+                            <div class="col-md-6 m-auto">
+                                @Html.EditorFor(model => model.Note.S4, new { htmlAttributes = new { @class = "form-control", type = "number", placeholder = "Note S4", @step = "0.01" } })
+                                @Html.ValidationMessageFor(model => model.Note.S4, "", new { @class = "text-danger" })
+                                <label style="display:none;" class="text-danger" id="input11"></label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                @if (Model.Etudiants4a.Where(e4 => e4.EtudiantId == Model.ID).FirstOrDefault() != null)
+                {
+                    <tr id="row_ann3">
+                        <td>
+                            @Html.EditorFor(model => model.Diplome.Annee3, new { htmlAttributes = new { @class = "form-control", type = "number", placeholder = "Annee3" } })
+                            @Html.ValidationMessageFor(model => model.Diplome.Annee3, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <div class="form-group text-center" id="redoublant3">
+                                <div class="col-md-12 m-auto">
+                                    <label class="radio-inline">
+                                        Oui @Html.RadioButtonFor(model => model.Note.Redoublant3, true)
+                                    </label>
+                                    <label class="radio-inline">
+                                        Non @Html.RadioButtonFor(model => model.Note.Redoublant3, false)
+                                    </label>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="row">
+                                <div class="col-md-6 m-auto" id="s5Form">
+                                    @Html.EditorFor(model => model.Note.S5, new { htmlAttributes = new { @class = "form-control", type = "number", placeholder = "Note S5", id = "s5", @step = "0.01" } })
+                                    @Html.ValidationMessageFor(model => model.Note.S5, "", new { @class = "text-danger" })
+                                    <label style="display:none;" class="text-danger" id="input12"></label>
+                                </div>
+                                <div class="col-md-6 m-auto" id="s6Form">
+                                    @Html.EditorFor(model => model.Note.S6, new { htmlAttributes = new { @class = "form-control", type = "number", placeholder = "Note S6", id = "s6", @step = "0.01" } })
+                                    @Html.ValidationMessageFor(model => model.Note.S6, "", new { @class = "text-danger" })
+                                    <label style="display:none;" class="text-danger" id="input13"></label>
+                                </div>
+                            </div>
+                        </td>
+                        
+                    </tr>
+                }
+                else { }
+                </tbody>
+        </table>
+        @*<input type="submit" name="submit" class="submit action-button" value="Submit" />*@
+                            <input type="submit" value="Enregistrer" class="action-button btn btn-success" />
+</fieldset>
+            </div>
+        </form>
+    </div>
+</div>

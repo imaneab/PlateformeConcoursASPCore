@@ -1,0 +1,87 @@
+﻿@model List<ProjetConcoursAspCore.Areas.Admin.ViewModel.Correction4aViewModel>
+    @{
+        ViewBag.Title = "Correction4a";
+    }
+
+    <main class="main">
+        <!-- Breadcrumb-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">Acceuil</li>
+            <li class="breadcrumb-item">
+                4ieme année
+            </li>
+            <li class="breadcrumb-item active">@ViewBag.Title</li>
+            
+        </ol>
+        <div class="container-fluid">
+            <div class="animated fadeIn">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fa fa-align-justify"></i> Correction des concours des 4 eme Annee
+                            </div>
+                            @using (Html.BeginForm("Correction4a", "Etudiant4a", FormMethod.Post, new { id = "correction4a_form" }))
+                            {
+                                <div class="card-body">
+
+                                    <div class="table-responsive">
+                                        
+
+                                            <table id="EmployeeListe" class="table table-striped table-bordered table-hover">
+
+                                                <thead>
+                                                    <tr>
+                                                        <th width="40px">NumDossier</th>
+                                                        <th>Cin</th>
+                                                        <th>Nom</th>
+                                                        <th>Prenom</th>
+                                                        <th>Diplome</th>
+                                                        <th>Filiere</th>
+                                                        <th>Classement</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                                    @for (int i = 0; i < Model.Count(); i++)
+                                                    {
+                                                        @Html.HiddenFor(model => model[i].ID)
+                                                        <tr class="odd gradeX">
+                                                            <td>@Html.DisplayFor(model => model[i].NumDossier)</td>
+                                                            <td>@Html.DisplayFor(model => model[i].Cin)</td>
+                                                            <td>@Html.DisplayFor(model => model[i].Nom)</td>
+                                                            <td>@Html.DisplayFor(model => model[i].Prenom)</td>
+                                                            <td>@Html.DisplayFor(model => model[i].Diplome)</td>
+                                                            <td>@Html.DisplayFor(model => model[i].Filiere)</td>
+                                                            <td width="60px">
+                                                                @Html.EditorFor(model => model[i].Classement, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                                                                @Html.ValidationMessageFor(model => model[i].Classement, "", new { @class = "text-danger" })
+                                                            </td>
+
+                                                        </tr>
+                                                    }
+
+                                                </tbody>
+                                            </table>
+                                        
+                                    </div>
+
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-sm btn-primary" type="submit">
+                                        <i class="fa fa-dot-circle-o"></i> Valider les notes
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" type="reset">
+                                        <i class="fa fa-ban"></i> Reset
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <!-- /.col-->
+                </div>
+            </div>
+        </div>
+    </main>
+

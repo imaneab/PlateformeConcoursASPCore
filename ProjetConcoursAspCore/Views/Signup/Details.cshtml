@@ -1,0 +1,108 @@
+﻿@model ProjetConcoursAspCore.Models.Etudiant
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Etudiant</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nom)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nom)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Prenom)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Prenom)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Cne)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cne)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Cin)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cin)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Civilite)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Civilite)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NumDossier)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumDossier)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Etat)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Etat)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateNaiss)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateNaiss)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Nationnalite)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nationnalite)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Tel)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Tel)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Etablissement)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Etablissement)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Filiere)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Filiere.Titre)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

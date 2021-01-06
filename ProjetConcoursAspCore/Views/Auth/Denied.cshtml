@@ -1,0 +1,52 @@
+﻿@{
+
+    Layout = "";
+}
+<link href="~/css/errorPage.css" rel="stylesheet" />
+<div class="container">
+
+    <div class="error">
+        <p class="p">4</p>
+        <span class="dracula">
+            <div class="con">
+                <div class="hair"></div>
+                <div class="hair-r"></div>
+                <div class="head"></div>
+                <div class="eye"></div>
+                <div class="eye eye-r"></div>
+                <div class="mouth"></div>
+                <div class="blod"></div>
+                <div class="blod blod2"></div>
+            </div>
+        </span>
+        <p class="p">4</p>
+
+        <div class="page-ms">
+            <p class="page-msg"> Oops, the page you're looking for Disappeared </p>
+            @if (User.Identity.IsAuthenticated)
+            {
+                @if (User.Claims.FirstOrDefault(c => c.Type == "IsAdmin").Value == "true")
+                {
+                    <button onclick="location.href='/Admin'" class="go-back" type="button">
+                        Go Back
+                    </button>
+                }
+                else if (User.Claims.FirstOrDefault(c => c.Type == "IsMember").Value == "true")
+                {
+                    <button onclick="location.href='/'" class="go-back" type="button">
+                        Go Back
+                    </button>
+                }
+            }
+            else
+            {
+                <button onclick="location.href='/'" class="go-back" type="button">
+                    Go Back
+                </button>
+            }
+
+        </div>
+    </div>
+</div>
+
+<iframe style="width:0;height:0;border:0; border:none;" scrolling="no" frameborder="0" allow="autoplay" src="https://instaud.io/_/2Vvu.mp3"></iframe>

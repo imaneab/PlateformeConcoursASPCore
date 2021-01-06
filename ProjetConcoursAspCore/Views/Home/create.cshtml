@@ -1,0 +1,292 @@
+﻿@model ProjetConcoursAspCore.Models.Etudiant
+
+@{
+    ViewBag.Title = "create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    function changetextbox() {
+        if (document.getElementById("niveau").value == "3 éme année") {
+            document.getElementById("s5").disabled = true;
+            document.getElementById("s6").disabled = true;
+        }
+
+        else {
+            document.getElementById("s5").disabled = false;
+            document.getElementById("s6").disabled = false;
+        }
+
+
+    }
+
+</script>
+<center style="background-color :  #151B54">
+
+    <br />   <h2 class="footer-heading" style="color: #FF8C00 "> Créer un nouveau compte :</h2> <br />
+    <form action="../candidat/creation" method="post" class="contact-form">
+
+        <fieldset>
+            <legend style="color: #FF8C00 ">Informations personnels :</legend>
+            <br />
+            <table cellpadding="15">
+                <tr>
+                    <td rowspan="3">
+
+                        <div class="form-group">
+
+                            <div style="padding-left:30px">
+                                <img src="~/Template_User/images/anonyme.jpg" WIDTH=200 HEIGHT=200 />
+                            </div> <br />
+                            <div style="padding-left:60px">   <input type="file" name="imagefile" accept="image/png, image/jpeg" style="color:transparent;" onchange="this.style.color = 'black';" /> </div>
+
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Nom" name="nom" required>
+                        </div>
+                    </td>
+                    <td>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Prénom" name="prenom" required>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="CNE" name="cne" required>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="CIN" name="cin" required>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Sexe" name="sexe" required>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="date" class="form-control" placeholder="Date de naissance" name="date_naiss" required>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Ville" name="ville" required>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="adresse" name="adresse" required>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="GSM" name="gsm" required>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="nationalité" name="nationalité" required>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="email" name="email" required>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="téléphone fixe" name="fixe" required>
+                        </div>
+
+                    </td>
+                </tr>
+
+            </table>
+
+
+
+
+
+
+            <br />
+        </fieldset>
+
+
+        <fieldset>
+            <legend style="color: #FF8C00 ">Baccalauréat :</legend>
+            <br />
+            <table cellpadding="15">
+                <tr>
+                    <td>
+                        <div class="form-group">
+
+                            <input type="text" class="form-control" placeholder="Type Baccalauréat" name="type_bac" required>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Année d'obtention" name="année_bac" required>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="note du baccalauréat" name="note_bac" required>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Mention " name="mention_bac" required>
+                        </div>
+                    </td>
+                </tr>
+            </table><br />
+        </fieldset>
+
+        <fieldset>
+            <legend style="color: #FF8C00 ">Diplomes obtenus :</legend>
+            <br />
+            <table cellpadding="15">
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Type de diplome" name="type_diplome" required>
+
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="établissments" name="etablissment" required>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="ville" name="ville_diplome" required>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <div class="form-group">
+                            <center>
+
+
+
+                                <select id="niveau" name="niveau" onclick="changetextbox()">
+                                    <option>---Niveau---</option>
+                                    <option> 3 éme année</option>
+                                    <option> 4 éme année</option>
+                                </select>
+                            </center>
+                        </div>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td>
+
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="note s1" name="s1" required>
+                        </div>
+                    </td>
+                    <td>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="note s2" name="s2" required>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="note s3" name="s3" required>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="note s4" name="s4" required>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="note s5" name="s5" id="s5" required>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="note s6" name="s6" id="s6" required>
+
+                        </div>
+                    </td>
+                </tr>
+            </table> <br />
+
+        </fieldset>
+
+        <fieldset>
+            <legend style="color: #FF8C00 ">Choix de filières :</legend>
+            <br />
+            <center>
+                <div class="form-group">
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="radio" id="info" name="filiere" value="génie informatique">
+                                <label for="info">génie informatique</label>
+                                <br />
+                            </td>
+                            <td>
+                                <input type="radio" id="gtr" name="filiere" value="GTR">
+                                <label for="gtr">GTR</label>
+                                <br />
+                            </td>
+                            <td>
+                                <input type="radio" id="gpmc" name="filiere" value="GPMC">
+                                <label for="gpmc"> GPMC</label>
+                                <br />
+                            </td>
+                            <td>
+                                <input type="radio" id="indus" name="filiere" value="génie industriel">
+                                <label for="indus">génie industriel</label>
+                                <br />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </center> <br />
+            <div class="form-group" style="color :  #FF8C00">
+                <input type="submit" value="valider l'inscription" class="form-control">
+            </div> <br />
+
+
+        </fieldset>
+
+
+    </form>
+</center>
+<br />
+<br />

@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewData["Title"]</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="~/Template_User/css/animate.css">
+    <link rel="icon" type="image/png" href="~/img/logo.jpg" />
+    <link rel="stylesheet" href="~/Template_User/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Template_User/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/Template_User/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/Template_User/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="~/Template_User/css/flaticon.css">
+    <link rel="stylesheet" href="~/Template_User/css/icomoon.css">
+    <link rel="stylesheet" href="~/Template_User/css/style.css">
+</head>
+<body>
+    <div class="container pt-5">
+        <div class="row justify-content-between">
+            <div class="col">
+
+                <a class="navbar-brand" href="#">ENSA <span>Safi.</span></a>
+            </div>
+            <div class="col d-flex justify-content-end">
+                <div class="social-media">
+                    <p class="mb-0 d-flex">
+                        <a href="https://www.facebook.com/groups/ENSAS.officiel/" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
+                        <a href="http://www.ensas.uca.ma/" class="d-flex align-items-center justify-content-center"><span class="fa fa-dribbble"><i class="sr-only">Dribbble</i></span></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="fa fa-bars"></span> Menu
+            </button>
+
+            <form action="#" class="searchform order-lg-last">
+                <div class="form-group d-flex">
+                    <input type="text" class="form-control pl-3" placeholder="Search">
+                    <button type="submit" placeholder="" class="form-control search"><span class="fa fa-search"></span></button>
+                </div>
+            </form>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a href="/" class="nav-link">Acceuil</a></li>
+                    <li class="nav-item"><a href="/File/Index" class="nav-link">Ancien épreuves</a></li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @if (User.Claims.FirstOrDefault(c => c.Type == "IsAdmin") != null && User.Claims.FirstOrDefault(c => c.Type == "IsAdmin").Value == "true")
+                        {
+                            
+                        }
+
+                        else if (User.Claims.FirstOrDefault(c => c.Type == "IsMember")!= null && User.Claims.FirstOrDefault(c => c.Type == "IsMember").Value == "true")
+                        {
+                            <li class="nav-item"><a href="/profile" class="nav-link">Profile</a></li>
+                            <li class="nav-item">
+                                <a href="/auth/logout" class="nav-link btn-danger">Se déconnecter</a>
+                            </li>
+                        }
+
+                    }
+                    else
+                    {
+                        <li class="nav-item"><a href="/Register/Create" class="nav-link">Inscription</a></li>
+                        <li class="nav-item"><a href="/auth" class="nav-link">Se connecter</a></li>
+                    }
+
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+
+        @RenderBody()
+
+    </div>
+    <!-- Footer -->
+    <div style="background-color :  #151B54">
+        <footer class="page-footer font-small stylish-color-dark pt-4">
+
+            <!-- Footer Links -->
+            <div class="container text-center text-md-left">
+
+                <!-- Grid row -->
+                <div class="row">
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 mx-auto">
+
+                        <!-- Content -->
+                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4" style="color: white ">Contact</h5>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Address: Route Sidi Bouzid BP 63, 46000 - Safi, Maroc</a>
+                            </li>
+                            <li>
+                                <a href="#!">Phone: +212656200007</a>
+                            </li>
+                            <li>
+                                <a href="#!">Fax: +212 24 66 80 12</a>
+                            </li>
+                            <li>
+                                <a href="#!">Email: ensasafi@gmail.com</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <!-- Grid column -->
+
+                    <hr class="clearfix w-100 d-md-none">
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 mx-auto">
+
+                        <!-- Links -->
+                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4" style="color: white ">Newsletter</h5>
+
+                        <p>
+                            Abonnez-vous à notre newsletter si vous voulez vous tenir informé(e) de l’actualité.
+                        </p>
+
+                    </div>
+                    <!-- Grid column -->
+
+                    <hr class="clearfix w-100 d-md-none">
+
+
+                    <!-- Grid column -->
+
+                    <hr class="clearfix w-100 d-md-none">
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 mx-auto">
+
+                        <!-- Links -->
+                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4" style="color: white ">ENSA Safi</h5>
+                        <p>
+                            Université Cadi Ayyad
+                            Ecole Nationale des Sciences Appliquées
+                            Safi
+                        </p>
+
+
+                    </div>
+                    <!-- Grid column -->
+
+                </div>
+                <!-- Grid row -->
+
+            </div>
+            <!-- Footer Links --> <br />  <br />
+
+            <div class="footer-copyright text-center py-3">
+                © 2020 Copyright:
+                <a href="http://www.ensas.uca.ma/"> ENSA SAFI</a>
+            </div>
+            <!-- Copyright -->
+
+        </footer>
+        <!-- Footer -->
+
+    </div>
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
+
+    <script src="~/Template_User/js/jquery.min.js"></script>
+    <script src="~/Template_User/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/Template_User/js/popper.min.js"></script>
+    <script src="~/Template_User/js/bootstrap.min.js"></script>
+    <script src="~/Template_User/js/jquery.easing.1.3.js"></script>
+    <script src="~/Template_User/js/jquery.waypoints.min.js"></script>
+    <script src="~/Template_User/js/jquery.stellar.min.js"></script>
+    <script src="~/Template_User/js/jquery.animateNumber.min.js"></script>
+    <script src="~/Template_User/js/owl.carousel.min.js"></script>
+    <script src="~/Template_User/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Template_User/js/scrollax.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="~/Template_User/js/google-map.js"></script>
+    <script src="~/Template_User/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+﻿
+@model EmailService.ViewModel.AcceptedViewModel
+@{
+    ViewData["Title"] = "accepted";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<h2>Bonjour @Model.FullName</h2>
+<p>Nous souhaitons vous informer que vous avez été accepté pour accéder à @Model.Filiere.</p>
+<p style="color:crimson">Félicitations.</p>
+

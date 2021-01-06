@@ -1,0 +1,12 @@
+﻿
+@model EmailService.ViewModel.SignupViewModel;
+@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+<h2>Bonjour @Model.FullName</h2>
+<p>
+    Bienvenue chez @EmailService.Config.Config.AppName, pour accéder à votre compte vous devez utiliser le mot de passe suivant: <b>@Model.Password</b>.
+</p>
+<p>
+    Cordialement.
+</p>
